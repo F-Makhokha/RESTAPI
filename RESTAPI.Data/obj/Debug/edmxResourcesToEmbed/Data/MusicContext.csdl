@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MusicDatabaseModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DatabaseEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Artists" EntityType="MusicDatabaseModel.Artist" />
+    <EntitySet Name="Videos" EntityType="MusicDatabaseModel.Video" />
+    <AssociationSet Name="Video_Artist" Association="MusicDatabaseModel.Video_Artist">
+      <End Role="Artist" EntitySet="Artists" />
+      <End Role="Video" EntitySet="Videos" />
+    </AssociationSet>
+    <FunctionImport Name="CreateNewArtist">
+      <Parameter Name="ArtistId" Mode="In" Type="Int32" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="UrlSafeName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteArtist">
+      <Parameter Name="ArtistId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetArtists" ReturnType="Collection(MusicDatabaseModel.GetArtists_Result)">
+      <Parameter Name="ArtistId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetVideos" ReturnType="Collection(MusicDatabaseModel.GetVideos_Result)">
+      <Parameter Name="videoId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateArtist">
+      <Parameter Name="ArtistId" Mode="In" Type="Int32" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="UrlSafeName" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Artist">
+    <Key>
+      <PropertyRef Name="ArtistId" />
+    </Key>
+    <Property Name="ArtistId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="UrlSafeName" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Videos" Relationship="MusicDatabaseModel.Video_Artist" FromRole="Artist" ToRole="Video" />
+  </EntityType>
+  <EntityType Name="Video">
+    <Key>
+      <PropertyRef Name="VideoId" />
+    </Key>
+    <Property Name="VideoId" Type="Int32" Nullable="false" />
+    <Property Name="Isrc" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="UrlSafeTitle" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ArtistId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Artist" Relationship="MusicDatabaseModel.Video_Artist" FromRole="Video" ToRole="Artist" />
+  </EntityType>
+  <Association Name="Video_Artist">
+    <End Role="Artist" Type="MusicDatabaseModel.Artist" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Video" Type="MusicDatabaseModel.Video" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artist">
+        <PropertyRef Name="ArtistId" />
+      </Principal>
+      <Dependent Role="Video">
+        <PropertyRef Name="ArtistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetArtists_Result">
+    <Property Type="Int32" Name="ArtistId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="UrlSafeName" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="VideoId" Nullable="true" />
+    <Property Type="String" Name="ISrc" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="UrlSafeTitle" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="GetVideos_Result">
+    <Property Type="Int32" Name="VideoId" Nullable="false" />
+    <Property Type="String" Name="iSrc" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="urlSafeTitle" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="artistId" Nullable="false" />
+  </ComplexType>
+</Schema>

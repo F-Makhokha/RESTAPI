@@ -1,0 +1,56 @@
+﻿<header>
+    <div class="content-wrapper">
+        <div class="float-left">
+            <p class="site-title">
+                <a href="~/">ASP.NET Web API</a></p>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>Welcome to Music REST Web API!</h1>               
+            </hgroup>
+            <p>This sample REST API project displays music entity of the artists and theirs videos.</p>
+            <p>Code project implements in C# and .NET MVC using IoC/Dependency Injection design pattern.</p>
+                        
+            <div>
+                REST API methods: 
+                <ul>   
+                <li>Get a specific Artist entity</li>       
+                <li>Get a specific Video entity </li> 
+                 <li>List all the videos they appear in a given artist</li> 
+                 <li>Add/update/delete an Artist entity </li> 
+                 <li>List all artists in the DB</li> 
+                </ul>
+            </div>
+            <div> 
+                Unit Test project tests following features: 
+                <ul>
+                  <li>Controller test  </li>
+                  <li>Data access test  </li>
+                  <li>REST Web API test   </li>   
+               </ul>    
+            </div>     
+        </div>
+    </section>
+    <section class="content-wrapper main-content clear-fix">
+        <h3>Follow these steps to set up the project:</h3>
+        <ol class="round">           
+            <li class="one">
+                <h5>Create Music.Db database</h5>
+                Right click on SQL Server Object Explorer, create LocalDb v11.0 database called "Music.Db" <br />
+                Run "Database Scripts.sql" to create schema, stored procedures                        
+            </li>
+            <li class="two">
+                <h5>Web.config & App.config</h5>
+                Database connection string should contain: "Data Source=(localdb)\v11.0;Initial Catalog=Music.Db;Integrated Security=True
+            </li>
+            <li class="three">
+                <h5>IIS set up</h5>
+                Web API project uses IIS Express; however to allow POST/DELETE api methods work, you need to set up the Web API run on your IIS server.
+            </li>
+        </ol>
+    </section>
+</div>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MusicDatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MusicDatabaseModelStoreContainer">
+    <EntitySet Name="Artist" EntityType="MusicDatabaseModel.Store.Artist" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Video" EntityType="MusicDatabaseModel.Store.Video" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="Video_Artist" Association="MusicDatabaseModel.Store.Video_Artist">
+      <End Role="Artist" EntitySet="Artist" />
+      <End Role="Video" EntitySet="Video" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Artist">
+    <Key>
+      <PropertyRef Name="ArtistId" />
+    </Key>
+    <Property Name="ArtistId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="150" />
+    <Property Name="UrlSafeName" Type="varchar" Nullable="false" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Video">
+    <Key>
+      <PropertyRef Name="VideoId" />
+    </Key>
+    <Property Name="VideoId" Type="int" Nullable="false" />
+    <Property Name="Isrc" Type="varchar" Nullable="false" MaxLength="150" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="150" />
+    <Property Name="UrlSafeTitle" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="ArtistId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="Video_Artist">
+    <End Role="Artist" Type="MusicDatabaseModel.Store.Artist" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Video" Type="MusicDatabaseModel.Store.Video" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artist">
+        <PropertyRef Name="ArtistId" />
+      </Principal>
+      <Dependent Role="Video">
+        <PropertyRef Name="ArtistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="CreateNewArtist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ArtistId" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="UrlSafeName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="DeleteArtist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ArtistId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetArtists" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ArtistId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetVideos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="videoId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateArtist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ArtistId" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="UrlSafeName" Type="nvarchar" Mode="In" />
+  </Function>
+</Schema>

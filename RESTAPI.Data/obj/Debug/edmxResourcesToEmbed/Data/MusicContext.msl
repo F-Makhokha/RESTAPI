@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MusicDatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+    <EntitySetMapping Name="Artists">
+      <EntityTypeMapping TypeName="MusicDatabaseModel.Artist">
+        <MappingFragment StoreEntitySet="Artist">
+          <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UrlSafeName" ColumnName="UrlSafeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Videos">
+      <EntityTypeMapping TypeName="MusicDatabaseModel.Video">
+        <MappingFragment StoreEntitySet="Video">
+          <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+          <ScalarProperty Name="Isrc" ColumnName="Isrc" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="UrlSafeTitle" ColumnName="UrlSafeTitle" />
+          <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CreateNewArtist" FunctionName="MusicDatabaseModel.Store.CreateNewArtist" />
+    <FunctionImportMapping FunctionImportName="DeleteArtist" FunctionName="MusicDatabaseModel.Store.DeleteArtist" />
+    <FunctionImportMapping FunctionImportName="GetArtists" FunctionName="MusicDatabaseModel.Store.GetArtists">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MusicDatabaseModel.GetArtists_Result">
+          <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UrlSafeName" ColumnName="UrlSafeName" />
+          <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+          <ScalarProperty Name="ISrc" ColumnName="ISrc" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="UrlSafeTitle" ColumnName="UrlSafeTitle" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetVideos" FunctionName="MusicDatabaseModel.Store.GetVideos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MusicDatabaseModel.GetVideos_Result">
+          <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+          <ScalarProperty Name="iSrc" ColumnName="iSrc" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="urlSafeTitle" ColumnName="urlSafeTitle" />
+          <ScalarProperty Name="artistId" ColumnName="artistId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateArtist" FunctionName="MusicDatabaseModel.Store.UpdateArtist" />
+  </EntityContainerMapping>
+</Mapping>
