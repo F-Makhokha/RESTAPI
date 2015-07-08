@@ -1,4 +1,4 @@
-This sample REST API project displays music entity of the artists and theirs videos.
+This sample REST API project displays music entity of the artists and their videos.
 
 Code project implements in C# and .NET MVC using IoC/Dependency Injection design pattern.
 
