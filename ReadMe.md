@@ -2,6 +2,8 @@ This sample REST API project displays music entity of the artists and their vide
 
 Code project implements in C# and .NET MVC using IoC/Dependency Injection design pattern.
 
+Open solution file with Visual Studio 2012
+
 REST API methods:
 
     Get a specific Artist entity
